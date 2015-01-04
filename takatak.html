@@ -5,13 +5,19 @@
 <head>
     <meta charset="utf-8" />
     <title>Takatak</title>
-    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="takatak.css"  />
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="takatak.css" />
+    <script type="text/javascript" src="svg.js"></script>
+    <script type="text/javascript" src="takatak.js"></script>
+    <script type="text/javascript">
+        if (SVG.supported) onload = function() { game.init() }
+        else alert('Please upgrade your browser to play Takatak');
+    </script>
 </head>
 
 <body>
     <header>TAKATAK</header>
-    <canvas width="800" height="600" id="game"></canvas>
+    <div id="stage"></div>
 </body>
 
 </html>
