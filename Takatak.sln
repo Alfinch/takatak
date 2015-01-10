@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{68703CFF-5C83-4F6A-B957-4753309B54B1}"
+	ProjectSection(SolutionItems) = preProject
+		mockup.svg = mockup.svg
+		takatak.html = takatak.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{7DC6BE06-D29F-471D-8BC8-542C71022865}"
+	ProjectSection(SolutionItems) = preProject
+		css\takatak.css = css\takatak.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{2A165F41-2166-443A-8188-27625F3FA32C}"
+	ProjectSection(SolutionItems) = preProject
+		js\svg.absorb.js = js\svg.absorb.js
+		js\svg.js = js\svg.js
+		takatak.coffee = takatak.coffee
+		js\takatak.graphics.js = js\takatak.graphics.js
+		js\takatak.js = js\takatak.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "svg", "svg", "{EBDFA4E3-C545-4E53-BD82-709D626D47CE}"
+	ProjectSection(SolutionItems) = preProject
+		svg\background.svg = svg\background.svg
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DC6BE06-D29F-471D-8BC8-542C71022865} = {68703CFF-5C83-4F6A-B957-4753309B54B1}
+		{2A165F41-2166-443A-8188-27625F3FA32C} = {68703CFF-5C83-4F6A-B957-4753309B54B1}
+		{EBDFA4E3-C545-4E53-BD82-709D626D47CE} = {68703CFF-5C83-4F6A-B957-4753309B54B1}
+	EndGlobalSection
+EndGlobal
