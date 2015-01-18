@@ -19,8 +19,7 @@ game = ( function( game ) {
       millisecondsPerTick = millisecondsPerCycle / ticksPerCycle,
       tickCount = 0,
 
-      numberOfLetters = 0,
-      gameString = '';
+      letters = [];
 
   var colors = {
     bg: '#1c1f24',
@@ -95,8 +94,8 @@ game = ( function( game ) {
   var tick = function () {
 
     if (tickCount === 0) {
-      gameString = '';
-      numberOfLetters = 0;
+      gameString = [];
+      letters.length = 0;
     }
 
     game.ui.timerBar
