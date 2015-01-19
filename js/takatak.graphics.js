@@ -1,18 +1,26 @@
-/*
- * TAKATAK
- * A probability-based shoot-em-up typing game
- * 
- * (c) Alfie Woodland 2015
- */
+﻿(function() {
+  'use strict';
+  this.Game = this.Game || function() {};
 
-'use strict';
+  this.Game.Graphics = {
+    Color: {
+      background: '#373e48',
+      panel: '#535d6c',
+      red: '#c83737'
+    },
+    Layer: {},
+    Sprite: {},
+    load: function() {
+      var sprite, svg;
+      console.log('Game.Graphics.load');
+      svg = Game.Global.SVG;
+      sprite = Game.Graphics.Sprite;
+      svg.load('../svg/background.svg', function(s) {
+        sprite.background = s;
+      });
+    }
+  };
 
-var game;
+}).call(this);
 
-game = (function (game) {
-
-
-
-  return game;
-
-}(game || {}));
+//# sourceMappingURL=takatak.graphics.js.map
