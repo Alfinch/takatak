@@ -8,14 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		mockup.svg = mockup.svg
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{2A165F41-2166-443A-8188-27625F3FA32C}"
-	ProjectSection(SolutionItems) = preProject
-		js\snap.svg.min.js = js\snap.svg.min.js
-		js\takatak.constructor.coffee = js\takatak.constructor.coffee
-		js\takatak.global.coffee = js\takatak.global.coffee
-		js\takatak.graphics.coffee = js\takatak.graphics.coffee
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", "{2FD26ED4-CC84-44FE-8B9D-AB560606560B}"
 EndProject
 Global
@@ -31,8 +23,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{2A165F41-2166-443A-8188-27625F3FA32C} = {68703CFF-5C83-4F6A-B957-4753309B54B1}
 	EndGlobalSection
 EndGlobal
