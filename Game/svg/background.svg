@@ -2,47 +2,40 @@
 <svg xmlns:xlink="http://www.w3.org/1999/xlink" height="600" width="800" version="1.1" xmlns="http://www.w3.org/2000/svg">
   
   <defs>
-    
     <linearGradient gradientUnits="userSpaceOnUse" id="gradient">
-      
-      <stop offset="0"     stop-color="white" stop-opacity="0" />
-      <stop offset="0.375" stop-color="white" stop-opacity="1" />
-      <stop offset="0.625" stop-color="white" stop-opacity="1" />
-      <stop offset="1"     stop-color="white" stop-opacity="0" />
-      
+      <stop offset="0"   stop-color="white" stop-opacity="0" />
+      <stop offset="0.4" stop-color="white" stop-opacity="1" />
+      <stop offset="0.6" stop-color="white" stop-opacity="1" />
+      <stop offset="1"   stop-color="white" stop-opacity="0" />
     </linearGradient>
-    
   </defs>
   
-  <rect fill="#373e48" height="600" width="800" />
+  <!-- Background fill & text bar -->
+  <rect fill="#1c1f24" height="600" width="800" />
   <rect fill="#535d6c" y="500" height="100" width="800" />
   
-  <g x="200" stroke-width="2" stroke="white" stroke-opacity="0.2" fill="none">
-    
-    <line x1="0"   y1="0" x2="0"   y2="500" />
+  <g stroke="url(#gradient)" stroke-width="2" opacity="0.2" fill="none">
+
+    <!-- Horizontal grid lines -->
+    <line x1="200" y1="0" x2="200" y2="500" />
+    <line x1="250" y1="0" x2="250" y2="500" />
+    <line x1="300" y1="0" x2="300" y2="500" />
+    <line x1="350" y1="0" x2="350" y2="500" />
     <line x1="400" y1="0" x2="400" y2="500" />
-    
-    <g stroke-opacity="0.5">
-      
-      <line x1="50"  y1="0" x2="50"  y2="500" />
-      <line x1="100" y1="0" x2="100" y2="500" />
-      <line x1="150" y1="0" x2="150" y2="500" />
-      <line x1="200" y1="0" x2="200" y2="500" />
-      <line x1="250" y1="0" x2="250" y2="500" />
-      <line x1="300" y1="0" x2="300" y2="500" />
-      <line x1="350" y1="0" x2="350" y2="500" />
-      
-    </g>
-    
+    <line x1="450" y1="0" x2="450" y2="500" />
+    <line x1="500" y1="0" x2="500" y2="500" />
+    <line x1="550" y1="0" x2="550" y2="500" />
+    <line x1="600" y1="0" x2="600" y2="500" />
+
+    <!-- Vertical grid lines -->
+    <line y2="50"  x2="800" y1="50"  x1="0" />
+    <line y2="100" x2="800" y1="100" x1="0" />
+    <line y2="150" x2="800" y1="150" x1="0" />
+    <line y2="200" x2="800" y1="200" x1="0" />
+    <line y2="250" x2="800" y1="250" x1="0" />
+    <line y2="300" x2="800" y1="300" x1="0" />
+    <line y2="350" x2="800" y1="350" x1="0" />
+    <line y2="400" x2="800" y1="400" x1="0" />
+    <line y2="450" x2="800" y1="450" x1="0" />
   </g>
-  
-  <line stroke-width="2" stroke="url(#SvgjsLinearGradient1018)" stroke-opacity="0.1" fill="none" y2="50" x2="800" y1="50" x1="0" id="SvgjsLine1023"></line>
-  <line stroke-width="2" stroke="url(#SvgjsLinearGradient1018)" stroke-opacity="0.1" fill="none" y2="100" x2="800" y1="100" x1="0" id="SvgjsLine1024"></line>
-  <line stroke-width="2" stroke="url(#SvgjsLinearGradient1018)" stroke-opacity="0.1" fill="none" y2="150" x2="800" y1="150" x1="0" id="SvgjsLine1025"></line>
-  <line stroke-width="2" stroke="url(#SvgjsLinearGradient1018)" stroke-opacity="0.1" fill="none" y2="200" x2="800" y1="200" x1="0" id="SvgjsLine1026"></line>
-  <line stroke-width="2" stroke="url(#SvgjsLinearGradient1018)" stroke-opacity="0.1" fill="none" y2="250" x2="800" y1="250" x1="0" id="SvgjsLine1027"></line>
-  <line stroke-width="2" stroke="url(#SvgjsLinearGradient1018)" stroke-opacity="0.1" fill="none" y2="300" x2="800" y1="300" x1="0" id="SvgjsLine1028"></line>
-  <line stroke-width="2" stroke="url(#SvgjsLinearGradient1018)" stroke-opacity="0.1" fill="none" y2="350" x2="800" y1="350" x1="0" id="SvgjsLine1029"></line>
-  <line stroke-width="2" stroke="url(#SvgjsLinearGradient1018)" stroke-opacity="0.1" fill="none" y2="400" x2="800" y1="400" x1="0" id="SvgjsLine1030"></line>
-  <line stroke-width="2" stroke="url(#SvgjsLinearGradient1018)" stroke-opacity="0.1" fill="none" y2="450" x2="800" y1="450" x1="0" id="SvgjsLine1031"></line>
 </svg>
