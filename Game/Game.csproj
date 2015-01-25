@@ -25,6 +25,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="style.css" />
+    <Content Include="svg\textBar.svg" />
     <Content Include="svg\gameBackground.svg" />
     <Content Include="svg\pawn.svg" />
     <Content Include="web.config" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ts\def\snap.d.ts" />
     <TypeScriptCompile Include="ts\takatak.cell.ts" />
+    <TypeScriptCompile Include="ts\takatak.enemy.ts" />
     <TypeScriptCompile Include="ts\takatak.graphics.ts" />
     <TypeScriptCompile Include="ts\takatak.grid.ts" />
     <TypeScriptCompile Include="ts\takatak.inputManager.ts" />

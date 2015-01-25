@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<level rounds="4">
+<level rounds="3">
   <title>Level 1</title>
   <background>gameBackground</background>
   <round index="0">
@@ -12,7 +12,7 @@
       <slot column="9" enemy="pawn" />
     </tick>
   </round>
-  <round index="2" ticks="8">
+  <round index="1" ticks="8">
     <tick index="0">
       <slot column="4" enemy="pawn" />
       <slot column="5" enemy="pawn" />

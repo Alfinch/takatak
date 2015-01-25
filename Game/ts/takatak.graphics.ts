@@ -26,6 +26,13 @@
     layer: string;
   }, callback?: (graphic: Snap.Element) => void) {
 
+    // Copy the svg to the layer
+    var addSvg = () => {
+      var clone = g.clone();
+      l.add(clone);
+      if (callback != null) callback(clone);
+    }
+
     // Attempt to fetch layer and graphic
     var l: Snap.Element = this._layers[args.layer];
     var g: Snap.Element = this._graphics[args.name];
@@ -44,12 +51,6 @@
       });
 
     } else addSvg();
-
-    // Copy the svg to the layer
-    var addSvg = () => {
-      var clone = g.clone();
-      l.add(clone);
-    }
   }
 
   ClearLayer(layer: string) {
@@ -61,6 +62,11 @@
     if (l == null)
       throw new Error('Attempted to clear to invalid layer ' + layer);
 
-    else l.selectAll().forEach((e: Snap.Element) => e.remove());
+    else l.selectAll('g>*').forEach((e: Snap.Element) => e.remove());
+  }
+
+  ClearAll() {
+    for (var layer in this._layers)
+      this.ClearLayer(layer);
   }
 }

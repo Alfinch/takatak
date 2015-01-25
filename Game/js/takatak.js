@@ -1,16 +1,102 @@
 ﻿var Cell = (function () {
-    function Cell(x, y) {
+    function Cell(args) {
+        this._grid = args.grid;
+        this._col = args.col;
+        this._row = args.row;
+        this.x = args.x;
+        this.y = args.y;
         this.damage = 0;
         this.occupied = false;
-        this.x = x;
-        this.y = y;
+        this.endCell = args.endCell || false;
     }
     Cell.prototype.Reset = function () {
         this.damage = 0;
         this.occupied = false;
     };
+
+    Cell.prototype.Up = function () {
+        return this._row === 0 ? this : this._grid.GetCell(this._col, this._row - 1);
+    };
+
+    Cell.prototype.Down = function () {
+        return this._row + 1 === this._grid.rows ? this : this._grid.GetCell(this._col, this._row + 1);
+    };
+
+    Cell.prototype.Left = function () {
+        return this._col === 0 ? this : this._grid.GetCell(this._col - 1, this._row);
+    };
+
+    Cell.prototype.Right = function () {
+        return this._col + 1 === this._grid.colums ? this : this._grid.GetCell(this._col + 1, this._row);
+    };
     return Cell;
 })();
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var Enemy = (function () {
+    function Enemy(graphics, cell, sprite, health) {
+        var _this = this;
+        this._graphics = graphics;
+        this.cell = cell;
+        this.health = health;
+        this.escaped = false;
+
+        this.cell.occupied = true;
+
+        this._graphics.DrawGraphic({
+            name: sprite,
+            layer: 'sprites'
+        }, function (sprite) {
+            _this._sprite = sprite;
+            _this._sprite.attr({
+                x: _this.cell.x,
+                y: _this.cell.y
+            });
+        });
+    }
+    Enemy.prototype.SetCell = function (newCell) {
+        if (!newCell.occupied) {
+            this.cell.occupied = false;
+            this.cell = newCell;
+            this.cell.occupied = true;
+        }
+    };
+
+    Enemy.prototype.Move = function (duration) {
+        this._sprite.animate({
+            x: this.cell.x,
+            y: this.cell.y
+        }, duration, mina.easeinout);
+    };
+
+    Enemy.prototype.TakeDamage = function () {
+        this.health -= this.cell.damage;
+        this.cell.damage = 0;
+    };
+
+    Enemy.prototype.Escape = function () {
+        if (this.cell.endCell)
+            this.escaped = true;
+    };
+    return Enemy;
+})();
+
+var Pawn = (function (_super) {
+    __extends(Pawn, _super);
+    function Pawn(graphics, cell) {
+        _super.call(this, graphics, cell, 'pawn', 100);
+    }
+    Pawn.prototype.Move = function (duration) {
+        this.SetCell(this.cell.Down());
+        Math.random() > 0.5 ? this.SetCell(this.cell.Left()) : this.SetCell(this.cell.Right());
+        _super.prototype.Move.call(this, duration);
+    };
+    return Pawn;
+})(Enemy);
 var Graphics = (function () {
     function Graphics(stageID) {
         // Fetch stage
@@ -29,6 +115,14 @@ var Graphics = (function () {
     }
     Graphics.prototype.DrawGraphic = function (args, callback) {
         var _this = this;
+        // Copy the svg to the layer
+        var addSvg = function () {
+            var clone = g.clone();
+            l.add(clone);
+            if (callback != null)
+                callback(clone);
+        };
+
         // Attempt to fetch layer and graphic
         var l = this._layers[args.layer];
         var g = this._graphics[args.name];
@@ -45,12 +139,6 @@ var Graphics = (function () {
             });
         } else
             addSvg();
-
-        // Copy the svg to the layer
-        var addSvg = function () {
-            var clone = g.clone();
-            l.add(clone);
-        };
     };
 
     Graphics.prototype.ClearLayer = function (layer) {
@@ -61,25 +149,73 @@ var Graphics = (function () {
         if (l == null)
             throw new Error('Attempted to clear to invalid layer ' + layer);
         else
-            l.selectAll().forEach(function (e) {
+            l.selectAll('g>*').forEach(function (e) {
                 return e.remove();
             });
+    };
+
+    Graphics.prototype.ClearAll = function () {
+        for (var layer in this._layers)
+            this.ClearLayer(layer);
     };
     return Graphics;
 })();
 var Grid = (function () {
     function Grid(args) {
+        this._graphics = args.graphics;
+        this._enemies = [];
+        this.colums = args.columns;
+        this.rows = args.rows;
+
         // Create cells
         this._cells = [];
-        for (var i = 0; i < args.col; i++) {
+
+        for (var i = 0; i < args.columns; i++) {
             this._cells[i] = [];
-            for (var j = 0; j < args.row; j++) {
-                var x = args.x + i * args.unit;
-                var y = args.y + j * args.unit;
-                this._cells[i][j] = new Cell(x, y);
+
+            for (var j = 0; j < args.rows; j++) {
+                var x = args.offset.x + i * args.unit;
+                var y = args.offset.y + j * args.unit;
+
+                this._cells[i][j] = new Cell({
+                    grid: this,
+                    col: i,
+                    row: j,
+                    x: x,
+                    y: y,
+                    endCell: j + 1 === this.rows
+                });
             }
         }
     }
+    Grid.prototype.GetCell = function (col, row) {
+        return this._cells[col][row];
+    };
+
+    Grid.prototype.AddEnemy = function (enemy, index) {
+        switch (enemy) {
+            case 'pawn':
+                this._enemies.push(new Pawn(this._graphics, this.GetCell(index, 0)));
+                break;
+        }
+    };
+
+    Grid.prototype.Move = function (duration) {
+        var gameOver = false;
+
+        this._enemies.forEach(function (enemy) {
+            return enemy.Move(duration);
+        });
+        this._enemies.forEach(function (enemy) {
+            return enemy.TakeDamage();
+        });
+        this._enemies.forEach(function (enemy) {
+            if (enemy.Escape())
+                gameOver = true;
+        });
+
+        return gameOver;
+    };
     return Grid;
 })();
 var InputManager = (function () {
@@ -211,10 +347,10 @@ var Game = (function () {
         this._graphics = new Graphics(stageID);
 
         this._grid = new Grid({
-            x: 200,
-            y: 0,
-            col: 10,
-            row: 13,
+            graphics: this._graphics,
+            offset: { x: 200, y: -40 },
+            columns: 10,
+            rows: 15,
             unit: 40
         });
 
@@ -233,11 +369,7 @@ var Game = (function () {
     }
     Game.prototype.Play = function (level) {
         var _this = this;
-        // Draw background
-        this._graphics.DrawGraphic({
-            name: level.background,
-            layer: 'background'
-        });
+        this.DrawGameInterface(level);
 
         var r = 0, t = 0, p = false;
 
@@ -277,15 +409,34 @@ var Game = (function () {
     };
 
     Game.prototype.Tick = function (tick) {
+        var _this = this;
+        // Move enemies
+        this._grid.Move(this._MS_PER_TICK);
+
+        // Make enemies
         if (tick != null) {
-            // Make enemies!
+            tick.slots.forEach(function (enemy, index) {
+                console.log(index + ': ' + enemy);
+                _this._grid.AddEnemy(enemy, index);
+            });
         }
-        // Do stuff!
     };
 
     Game.prototype.EndGame = function (win) {
         clearInterval(this._intervalID);
+        this._graphics.ClearAll();
         console.log('You ' + win ? 'won!' : 'lost!');
+    };
+
+    Game.prototype.DrawGameInterface = function (level) {
+        this._graphics.DrawGraphic({
+            name: level.background,
+            layer: 'background'
+        });
+        this._graphics.DrawGraphic({
+            name: 'textBar',
+            layer: 'interface'
+        });
     };
     return Game;
 })();

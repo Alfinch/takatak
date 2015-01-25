@@ -16,10 +16,10 @@
     this._graphics = new Graphics(stageID);
 
     this._grid = new Grid({
-      x: 200,
-      y: 0,
-      col: 10,
-      row: 13,
+      graphics: this._graphics,
+      offset: { x: 200, y: -40 },
+      columns: 10,
+      rows: 15,
       unit: 40
     });
 
@@ -40,11 +40,7 @@
 
   Play(level: ILevel) {
 
-    // Draw background
-    this._graphics.DrawGraphic({
-      name: level.background,
-      layer: 'background'
-    });
+    this.DrawGameInterface(level);
 
     var r = 0, t = 0, p = false;
 
@@ -83,15 +79,33 @@
   }
 
   Tick(tick: ITick) {
-    if (tick != null) {
-      // Make enemies!
-    }
 
-    // Do stuff!
+    // Move enemies
+    this._grid.Move(this._MS_PER_TICK);
+
+    // Make enemies
+    if (tick != null) {
+      tick.slots.forEach((enemy: string, index: number) => {
+        console.log(index + ': ' + enemy);
+        this._grid.AddEnemy(enemy, index);
+      });
+    }
   }
 
   EndGame(win: boolean) {
     clearInterval(this._intervalID);
+    this._graphics.ClearAll();
     console.log('You ' + win ? 'won!' : 'lost!');
+  }
+
+  DrawGameInterface(level: ILevel) {
+    this._graphics.DrawGraphic({
+      name: level.background,
+      layer: 'background'
+    });
+    this._graphics.DrawGraphic({
+      name: 'textBar',
+      layer: 'interface'
+    });
   }
 }
