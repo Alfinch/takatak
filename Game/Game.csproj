@@ -20,14 +20,25 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="js\snap.svg.min.js" />
+    <Content Include="js\takatak.js" />
+    <Content Include="levels\level1.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="style.css" />
-    <Content Include="svg\background.svg" />
+    <Content Include="svg\gameBackground.svg" />
+    <Content Include="svg\pawn.svg" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="ts\takatak.event.ts" />
-    <TypeScriptCompile Include="ts\takatak.global.ts" />
-    <TypeScriptCompile Include="ts\takatak.graphic.ts" />
+    <TypeScriptCompile Include="ts\def\snap.d.ts" />
+    <TypeScriptCompile Include="ts\takatak.cell.ts" />
+    <TypeScriptCompile Include="ts\takatak.graphics.ts" />
+    <TypeScriptCompile Include="ts\takatak.grid.ts" />
+    <TypeScriptCompile Include="ts\takatak.inputManager.ts" />
+    <TypeScriptCompile Include="ts\takatak.inputParser.ts" />
+    <TypeScriptCompile Include="ts\takatak.interfaces.ts" />
+    <TypeScriptCompile Include="ts\takatak.levels.ts" />
+    <TypeScriptCompile Include="ts\takatak.textBar.ts" />
     <TypeScriptCompile Include="ts\takatak.ts" />
   </ItemGroup>
   <ItemGroup>

@@ -113,7 +113,7 @@ declare module Snap {
   }
 
   export interface Element {
-    add(): void;
+    add(el: Snap.Element): Snap.Element;
     addClass(value: string): Snap.Element;
     after(el: Snap.Element): Snap.Element;
     animate(attrs: Object, duration: number, easing?: Function, callback?: Function): Snap.Element;

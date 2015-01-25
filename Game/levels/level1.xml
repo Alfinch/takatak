@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<level rounds="4">
+  <title>Level 1</title>
+  <background>gameBackground</background>
+  <round index="0">
+    <tick index="0">
+      <slot column="0" enemy="pawn" />
+      <slot column="9" enemy="pawn" />
+    </tick>
+    <tick index="8">
+      <slot column="0" enemy="pawn" />
+      <slot column="9" enemy="pawn" />
+    </tick>
+  </round>
+  <round index="2" ticks="8">
+    <tick index="0">
+      <slot column="4" enemy="pawn" />
+      <slot column="5" enemy="pawn" />
+    </tick>
+    <tick index="4">
+      <slot column="0" enemy="pawn" />
+      <slot column="3" enemy="pawn" />
+      <slot column="6" enemy="pawn" />
+      <slot column="9" enemy="pawn" />
+    </tick>
+  </round>
+</level>
